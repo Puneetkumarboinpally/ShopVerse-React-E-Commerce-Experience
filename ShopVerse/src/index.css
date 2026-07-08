@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* centers the wrapper */
+  padding: 0 20px; /* space inside */
+}
+
 @theme {
   /* Light Mode */
   --color-background: #f8fafc;

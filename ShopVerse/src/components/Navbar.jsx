@@ -1,29 +1,48 @@
-import { Link } from "react-router-dom";
-import { Sun } from "lucide-react";
+import { NavLink, Link } from "react-router-dom";
+import { Sun, Moon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem("darkMode");
+    return stored ? JSON.parse(stored) : false;
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
   return (
     <div>
-      <nav className="flex justify-between items-center bg-surface  border-b border-border py-4 px-8">
+      <nav className="flex justify-between items-center bg-surface  border-b border-border p-4 h-15">
         <div>
-          <Link to="/" className="text-xl font-bold text-primary">
+          <NavLink to="/" className="text-xl font-bold text-primary">
             Shop
             <span className="text-accent">Verse</span>
-          </Link>
+          </NavLink>
         </div>
         <div className="flex gap-6">
-          <Link
+          <NavLink
             to="/"
-            className="text-lg text-secondary font-semibold transition-all duration-300 ease hover:text-accent"
+            className={({ isActive }) =>
+              `text-lg font-semibold transition-all duration-300 ${
+                isActive ? "text-accent" : "text-secondary hover:text-accent"
+              }`
+            }
           >
             Home
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/checkout"
-            className="text-lg text-secondary font-semibold  transition-all duration-300 ease hover:text-accent"
+            className={({ isActive }) =>
+              `text-lg font-semibold transition-all duration-300 ${
+                isActive ? "text-accent" : "text-secondary hover:text-accent"
+              }`
+            }
           >
             Checkout
-          </Link>
+          </NavLink>
         </div>
         <div className="flex gap-2 items-center">
           <Link
@@ -38,9 +57,17 @@ const Navbar = () => {
           >
             Register
           </Link>
-          <button className="w-12 h-6 flex items-center border-2 border-border p-1">
-            <div>
-              <Sun />
+          <button
+            onClick={() => setDarkMode((prev) => !prev)}
+            aria-label="Toggle dark mode"
+            className="w-10 h-6 flex items-center border-2 border-border bg-secondary cursor-pointer p-1 rounded-full"
+          >
+            <div
+              className={`w-4 h-4 flex items-center rounded-full
+                 transition-all duration-500
+                  transform ${darkMode ? "translate-x-3 rotate-90 bg-yellow-500" : "translate-x-0 rotate-0 bg-blue-500"}`}
+            >
+              {darkMode ? <Sun /> : <Moon />}
             </div>
           </button>
         </div>
