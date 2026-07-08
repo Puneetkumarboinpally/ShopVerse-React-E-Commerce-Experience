@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     id: 1,
     name: "Wireless Headphones",
@@ -268,3 +268,4 @@ export const products = [
       "Wireless gaming controller with ergonomic design and long-lasting battery.",
   },
 ];
+export default products;

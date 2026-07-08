@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="flex justify-between items-center bg-surface  border-b border-border py-4 px-8">
+      <nav className="flex justify-between items-center bg-surface  border-b border-border p-4 h-15">
         <div>
           <NavLink to="/" className="text-xl font-bold text-primary">
             Shop
@@ -60,12 +60,12 @@ const Navbar = () => {
           <button
             onClick={() => setDarkMode((prev) => !prev)}
             aria-label="Toggle dark mode"
-            className="w-14 h-8 flex items-center border-2 border-border bg-secondary cursor-pointer p-1 rounded-full"
+            className="w-10 h-6 flex items-center border-2 border-border bg-secondary cursor-pointer p-1 rounded-full"
           >
             <div
-              className={`w-6 h-6 flex items-center rounded-full
+              className={`w-4 h-4 flex items-center rounded-full
                  transition-all duration-500
-                  transform ${darkMode ? "translate-x-5 rotate-90 bg-yellow-500" : "translate-x-0 rotate-0 bg-blue-500"}`}
+                  transform ${darkMode ? "translate-x-3 rotate-90 bg-yellow-500" : "translate-x-0 rotate-0 bg-blue-500"}`}
             >
               {darkMode ? <Sun /> : <Moon />}
             </div>
