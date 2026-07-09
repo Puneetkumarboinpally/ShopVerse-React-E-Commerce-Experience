@@ -1,42 +1,50 @@
-import React from "react";
 import products from "../data/products";
 
 const Home = () => {
   const text = "text-xl text-primary font-semibold";
   const button =
-    "py-1 px-3 bg-accent rounded-2xl text-text font-semibold cursor-pointer active:scale-95 shadow-lg transition-all duration-300 hover:translate-y-[-2px]";
+    "py-2 px-3 bg-accent rounded-xl text-text font-semibold cursor-pointer active:scale-95 shadow-lg transition-all duration-300 hover:translate-y-[-2px]";
 
   return (
-    <div className="h-full text-center p-8">
+    <div className="h-full text-center p-8 mt-8">
       <div>
         <h1 className="text-5xl text-text font-bold p-4 my-8">
-          Welcome to ShopVerse
+          Welcome to Shop
+          <span className="text-accent">Verse</span>
         </h1>
         <p className="text-lg text-text-muted font-semibold">
           Discover amazing products at great prices
         </p>
       </div>
-      <div className="sm:p-4 lg:p-16">
+      <div className="p-4 lg:p-16">
         <h2 className="text-left mb-8 text-3xl text-text font-bold">
           Our Products
         </h2>
-        <div className="flex grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-primary/30 border-2 border-white/40 overflow-hidden shadow-lg flex flex-col justify-between gap-3 rounded-xl p-4"
+              className="h-full bg-primary/30 border-2 border-white/40 overflow-hidden shadow-lg 
+              flex flex-col justify-between gap-3 rounded-xl p-4 transition-all duration-300 hover:shadow-xl"
             >
               <img
-                className="h-60 object-cover rounded-xl transition-all duration-300 hover:scale-105"
+                className="aspect-square w-full object-cover object-center rounded-xl transition-all duration-300 hover:scale-105"
                 loading="lazy"
                 src={product.image}
                 alt={product.name}
               />
-              <h3 className={text}>{product.name}</h3>
-              <h3 className={text}>${product.price}</h3>
-              <div className="flex text-center gap-2">
-                <button className={button}>View Details</button>
-                <button className={button}>Add to Cart</button>
+              <p className={text}>{product.name}</p>
+              <p className={text}>${product.price}</p>
+              <div className="flex my-2 text-center gap-2">
+                <button
+                  aria-label="View Details"
+                  className={`${button} flex-1`}
+                >
+                  View Details
+                </button>
+                <button aria-label="add to cart" className={`${button} flex-1`}>
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))}

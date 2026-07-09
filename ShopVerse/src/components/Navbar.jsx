@@ -1,8 +1,9 @@
 import { NavLink, Link } from "react-router-dom";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("darkMode");
     return stored ? JSON.parse(stored) : false;
@@ -15,18 +16,24 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="flex justify-between items-center bg-surface  border-b border-border p-4 h-15">
+      <nav className="fixed top-0 right-0 left-0 z-50 flex justify-between items-center bg-surface  border-b border-border p-6 h-18">
         <div>
-          <NavLink to="/" className="text-xl font-bold text-primary">
+          {/* logo */}
+
+          <NavLink to="/" className="text-2xl font-bold text-primary">
             Shop
             <span className="text-accent">Verse</span>
           </NavLink>
         </div>
-        <div className="flex gap-6">
+        {/* nav menu */}
+
+        <div className="hidden md:flex justify-center items-center gap-6">
+          {/* nav links */}
+
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `text-lg font-semibold transition-all duration-300 ${
+              `text-lg font-bold transition-all duration-300 ${
                 isActive ? "text-accent" : "text-secondary hover:text-accent"
               }`
             }
@@ -36,7 +43,7 @@ const Navbar = () => {
           <NavLink
             to="/checkout"
             className={({ isActive }) =>
-              `text-lg font-semibold transition-all duration-300 ${
+              `text-lg font-bold transition-all duration-300 ${
                 isActive ? "text-accent" : "text-secondary hover:text-accent"
               }`
             }
@@ -44,19 +51,26 @@ const Navbar = () => {
             Checkout
           </NavLink>
         </div>
-        <div className="flex gap-2 items-center">
+        {/* CTA buttons */}
+
+        <div className="hidden md:flex gap-2 items-center">
+          {/* Login button */}
           <Link
             to="/auth"
-            className="text-lg text-primary py-1 px-2 font-semibold bg-accent rounded active:scale-95 transition-all duration-300 ease hover:translate-y-[-2px]"
+            className="text-lg text-primary py-2 px-4 font-bold bg-accent rounded-md active:scale-95 transition-all duration-500 ease hover:translate-y-[-4px]"
           >
             Login
           </Link>
+          {/* Register button */}
+
           <Link
             to="/auth"
-            className="text-lg text-primary py-1 px-2 font-semibold bg-accent rounded active:scale-95 transition-all duration-300 ease hover:translate-y-[-2px]"
+            className="text-lg text-accent py-2 px-4 font-bold bg-primary rounded-md active:scale-95 transition-all duration-500 ease hover:translate-y-[-4px]"
           >
             Register
           </Link>
+          {/* Toggle button */}
+
           <button
             onClick={() => setDarkMode((prev) => !prev)}
             aria-label="Toggle dark mode"
@@ -70,6 +84,13 @@ const Navbar = () => {
               {darkMode ? <Sun /> : <Moon />}
             </div>
           </button>
+        </div>
+
+        <div
+          onClick={() => setMenuOpen((prev) => !prev)}
+          className="md:hidden cursor-pointer"
+        >
+          {menuOpen ? <Menu /> : <X />}
         </div>
       </nav>
     </div>

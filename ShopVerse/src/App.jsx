@@ -6,7 +6,7 @@ import Checkout from "./pages/Checkout.jsx";
 
 const App = () => {
   return (
-    <div className="bg-background h-full">
+    <div className="transition-color duration-600 ease bg-background h-full">
       <Navbar />
 
       <Routes>
