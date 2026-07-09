@@ -22,9 +22,13 @@ const Home = () => {
         </h2>
         <div className="flex grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div className="bg-primary/30 border-2 border-white/40 shadow-lg flex flex-col justify-between gap-3 rounded-xl p-4">
+            <div
+              key={product.id}
+              className="bg-primary/30 border-2 border-white/40 overflow-hidden shadow-lg flex flex-col justify-between gap-3 rounded-xl p-4"
+            >
               <img
-                className="h-60 object-cover rounded-xl loading-lazy transition-all duration-300 hover:scale-105"
+                className="h-60 object-cover rounded-xl transition-all duration-300 hover:scale-105"
+                loading="lazy"
                 src={product.image}
                 alt={product.name}
               />
