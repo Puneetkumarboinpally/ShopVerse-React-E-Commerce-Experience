@@ -94,7 +94,7 @@ const products = [
     name: "Office Chair",
     price: 199.99,
     image:
-      "https://images.unsplash.com/photo-1505843490701-5be5d6b19d16?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG9mZmljZSUyMGNoYWlyfGVufDB8fDB8fHww",
     description:
       "Ergonomic office chair with adjustable height and lumbar support.",
   },
@@ -173,7 +173,7 @@ const products = [
     name: "Electric Kettle",
     price: 54.99,
     image:
-      "https://images.unsplash.com/photo-1570286424717-86d9d7f0d5c2?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1738520420652-0c47cea3922b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8a2V0dGxlfGVufDB8fDB8fHww",
     description:
       "Fast-boiling electric kettle with stainless steel finish and auto shut-off.",
   },
@@ -209,7 +209,7 @@ const products = [
     name: "Action Camera",
     price: 249.99,
     image:
-      "https://images.unsplash.com/photo-1519183071298-a2962be90b8e?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1571190144364-1da84d9ca448?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFjdGlvbiUyMGNhbWVyYXxlbnwwfHwwfHx8MA%3D%3D",
     description:
       "Capture stunning adventures with waterproof 4K action camera.",
   },
@@ -245,7 +245,7 @@ const products = [
     name: "Electric Toothbrush",
     price: 69.99,
     image:
-      "https://images.unsplash.com/photo-1559591937-abc3d6d1d8c6?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1559591937-c78f24c3d8be?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZWxlY3RyaWMlMjB0b290aGJydXNofGVufDB8fDB8fHww",
     description:
       "Rechargeable electric toothbrush with multiple brushing modes and timer.",
   },
