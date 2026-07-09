@@ -16,13 +16,13 @@ const Home = () => {
           Discover amazing products at great prices
         </p>
       </div>
-      <div className="sm:p-8 lg:p-16">
-        <h2 className="text-left mb-8 text-xl text-text font-bold">
+      <div className="sm:p-4 lg:p-16">
+        <h2 className="text-left mb-8 text-3xl text-text font-bold">
           Our Products
         </h2>
         <div className="flex grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div className="bg-white/10 border-2 border-white/20 shadow-lg flex flex-col justify-between gap-3 rounded-xl p-4">
+            <div className="bg-primary/30 border-2 border-white/40 shadow-lg flex flex-col justify-between gap-3 rounded-xl p-4">
               <img
                 className="h-60 object-cover rounded-xl loading-lazy transition-all duration-300 hover:scale-105"
                 src={product.image}
