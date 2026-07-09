@@ -6,7 +6,7 @@ import Checkout from "./pages/Checkout.jsx";
 
 const App = () => {
   return (
-    <div className="bg-background h-screen">
+    <div className="bg-background h-full">
       <Navbar />
 
       <Routes>
