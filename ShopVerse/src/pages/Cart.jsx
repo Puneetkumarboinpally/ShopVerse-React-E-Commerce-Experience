@@ -1,8 +1,6 @@
-import React from 'react'
-
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <div className="text-red-500 h-screen">Cart</div>
   )
 }
 
