@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Auth from "./pages/Auth.jsx";
-import Checkout from "./pages/Checkout.jsx";
+import Cart from "./pages/Cart.jsx";
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </div>
