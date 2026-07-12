@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -14,11 +13,13 @@ const Auth = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   function onSubmit(data) {
     console.log(data);
+    reset();
   }
 
   return (
@@ -28,6 +29,7 @@ const Auth = () => {
           {mode === "signup" ? "Sign Up" : "Login"}
         </h1>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          {/* Email Section */}
           <div className={formGroupStyles}>
             <label htmlFor="email" className={labelStyles}>
               Email
@@ -49,6 +51,7 @@ const Auth = () => {
               <p className="text-red-500 text-sm">{errors.email.message}</p>
             )}
           </div>
+          {/* Password Section */}
           <div className={formGroupStyles}>
             <label htmlFor="password" className={labelStyles}>
               Password
@@ -67,30 +70,62 @@ const Auth = () => {
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
+          {/* Number Section */}
+          {mode === "signup" && (
+            <div className={`${formGroupStyles}`}>
+              <label className={labelStyles} htmlFor="number">
+                Mobile Number
+              </label>
+              <input
+                className={inputStyles}
+                type="tel"
+                id="number"
+                placeholder="077-7777-7777"
+                {...register("number", {
+                  required: mode === "signup" ? "Enter a valid number" : false,
+                  pattern: {
+                    value: /^[0-9]{10,}$/,
+                    message: "Enter a valid mobile number",
+                  },
+                })}
+              />
+              {errors.number && (
+                <p className="text-red-500 text-sm">{errors.number.message}</p>
+              )}
+            </div>
+          )}
+
+          {/* signup button */}
           <button className={buttonStyles} type="submit">
             {mode === "signup" ? "Sign Up" : "Login"}
           </button>
           {mode === "signup" ? (
             <p className="text-text">
               Already have an account?
-              <Link
-                to="/auth"
-                onClick={() => setMode("login")}
+              <button
+                type="button"
+                onClick={() => {
+                  reset();
+                  setMode("login");
+                }}
                 className="text-accent font-semibold ml-1 underline cursor-pointer"
               >
                 Login
-              </Link>
+              </button>
             </p>
           ) : (
             <p className="text-text">
               Don't have an account?
-              <Link
-                to="/auth"
-                onClick={() => setMode("signup")}
+              <button
+                type="button"
+                onClick={() => {
+                  reset();
+                  setMode("signup");
+                }}
                 className="text-accent font-semibold ml-1 underline cursor-pointer"
               >
                 Sign Up
-              </Link>
+              </button>
             </p>
           )}
         </form>
