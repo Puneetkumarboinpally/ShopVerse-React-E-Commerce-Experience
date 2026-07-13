@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthDataContext } from "../context/AuthContext";
 
 const formGroupStyles = "flex flex-col gap-1 mb-4";
 const buttonStyles =
@@ -10,6 +11,8 @@ const inputStyles =
 
 const Auth = () => {
   const [mode, setMode] = useState("signup");
+  const { signup, login } = useContext(AuthDataContext);
+
   const {
     register,
     handleSubmit,
@@ -18,7 +21,11 @@ const Auth = () => {
   } = useForm();
 
   function onSubmit(data) {
-    console.log(data);
+    if (mode === "signup") {
+      signup(data.email, data.password);
+    } else {
+      login(data.email, data.password);
+    }
     reset();
   }
 
@@ -70,30 +77,6 @@ const Auth = () => {
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
-          {/* Number Section */}
-          {mode === "signup" && (
-            <div className={`${formGroupStyles}`}>
-              <label className={labelStyles} htmlFor="number">
-                Mobile Number
-              </label>
-              <input
-                className={inputStyles}
-                type="tel"
-                id="number"
-                placeholder="077-7777-7777"
-                {...register("number", {
-                  required: mode === "signup" ? "Enter a valid number" : false,
-                  pattern: {
-                    value: /^[0-9]{10,}$/,
-                    message: "Enter a valid mobile number",
-                  },
-                })}
-              />
-              {errors.number && (
-                <p className="text-red-500 text-sm">{errors.number.message}</p>
-              )}
-            </div>
-          )}
 
           {/* signup button */}
           <button className={buttonStyles} type="submit">
