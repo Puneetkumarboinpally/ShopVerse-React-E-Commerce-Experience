@@ -1,12 +1,15 @@
 import { NavLink, Link } from "react-router-dom";
 import { Sun, Moon, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthDataContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("darkMode");
     return stored ? JSON.parse(stored) : false;
   });
+
+  const { user, logout } = useContext(AuthDataContext);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -16,7 +19,7 @@ const Navbar = () => {
   }, [darkMode]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-border h-18">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-border h-16">
       <div className="flex items-center justify-between h-full px-6">
         {/* Logo */}
         <NavLink to="/" className="text-2xl font-bold text-primary">
@@ -29,9 +32,7 @@ const Navbar = () => {
             to="/"
             className={({ isActive }) =>
               `text-lg font-bold transition-all duration-300 ${
-                isActive
-                  ? "text-accent"
-                  : "text-secondary hover:text-accent"
+                isActive ? "text-accent" : "text-secondary hover:text-accent"
               }`
             }
           >
@@ -39,12 +40,10 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/checkout"
+            to="/cart"
             className={({ isActive }) =>
               `text-lg font-bold transition-all duration-300 ${
-                isActive
-                  ? "text-accent"
-                  : "text-secondary hover:text-accent"
+                isActive ? "text-accent" : "text-secondary hover:text-accent"
               }`
             }
           >
@@ -54,19 +53,37 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-2 items-center">
-          <Link
-            to="/auth"
-            className="text-lg text-primary py-2 px-4 font-bold bg-accent rounded-md active:scale-95 transition-all duration-500 hover:-translate-y-1"
-          >
-            Login
-          </Link>
+          {!user ? (
+            <>
+              <Link
+                to="/auth"
+                className="text-lg text-primary py-2 px-4 font-bold bg-accent rounded-md active:scale-95 transition-all duration-500 hover:-translate-y-1"
+              >
+                Login
+              </Link>
 
-          <Link
-            to="/auth"
-            className="text-lg text-accent py-2 px-4 font-bold bg-primary rounded-md active:scale-95 transition-all duration-500 hover:-translate-y-1"
-          >
-            Register
-          </Link>
+              <Link
+                to="/auth"
+                className="text-lg text-accent py-2 px-4 font-bold bg-primary rounded-md active:scale-95 transition-all duration-500 hover:-translate-y-1"
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className=" text-yellow-600 text-lg font-bold mx-2">
+                {user.email}
+              </span>
+
+              <button
+                className="text-lg text-primary cursor-pointer py-2 px-4 font-bold bg-accent rounded-md active:scale-95 transition-all duration-500 hover:-translate-y-1"
+                onClick={logout}
+                type="button"
+              >
+                Logout
+              </button>
+            </>
+          )}
 
           <button
             onClick={() => setDarkMode((prev) => !prev)}
@@ -86,6 +103,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
+
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-primary cursor-pointer"
@@ -126,21 +144,40 @@ const Navbar = () => {
             Cart
           </NavLink>
 
-          <Link
-            to="/auth"
-            onClick={() => setMenuOpen(false)}
-            className="bg-accent text-primary font-bold rounded-md py-2 text-center"
-          >
-            Login
-          </Link>
+          {!user ? (
+            <>
+              <Link
+                to="/auth"
+                onClick={() => setMenuOpen(false)}
+                className="bg-accent text-primary font-bold rounded-md py-2 text-center"
+              >
+                Login
+              </Link>
 
-          <Link
-            to="/auth"
-            onClick={() => setMenuOpen(false)}
-            className="bg-primary text-accent font-bold rounded-md py-2 text-center"
-          >
-            Register
-          </Link>
+              <Link
+                to="/auth"
+                onClick={() => setMenuOpen(false)}
+                className="bg-primary text-accent font-bold rounded-md py-2 text-center"
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="text-yellow-600 font-bold">{user.email}</span>
+
+              <button
+                onClick={() => {
+                  logout();
+                  setMenuOpen(false);
+                }}
+                type="button"
+                className="bg-accent text-primary font-bold rounded-md py-2"
+              >
+                Logout
+              </button>
+            </>
+          )}
 
           <button
             onClick={() => setDarkMode((prev) => !prev)}

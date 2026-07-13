@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthDataContext } from "../context/AuthContext";
 
 const formGroupStyles = "flex flex-col gap-1 mb-4";
 const buttonStyles =
@@ -10,6 +12,12 @@ const inputStyles =
 
 const Auth = () => {
   const [mode, setMode] = useState("signup");
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
+  const { signup, login } = useContext(AuthDataContext);
+
   const {
     register,
     handleSubmit,
@@ -18,7 +26,20 @@ const Auth = () => {
   } = useForm();
 
   function onSubmit(data) {
-    console.log(data);
+    setError(null);
+    let result;
+    if (mode === "signup") {
+      result = signup(data.email, data.password);
+    } else {
+      result = login(data.email, data.password);
+    }
+
+    if (result.success) {
+      navigate("/");
+      alert("login successful 👍");
+    } else {
+      setError(result.error);
+    }
     reset();
   }
 
@@ -29,6 +50,7 @@ const Auth = () => {
           {mode === "signup" ? "Sign Up" : "Login"}
         </h1>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          {error && <p className="bg-red-200 text-text py-2 px-2">{error}</p>}
           {/* Email Section */}
           <div className={formGroupStyles}>
             <label htmlFor="email" className={labelStyles}>
@@ -70,30 +92,6 @@ const Auth = () => {
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
-          {/* Number Section */}
-          {mode === "signup" && (
-            <div className={`${formGroupStyles}`}>
-              <label className={labelStyles} htmlFor="number">
-                Mobile Number
-              </label>
-              <input
-                className={inputStyles}
-                type="tel"
-                id="number"
-                placeholder="077-7777-7777"
-                {...register("number", {
-                  required: mode === "signup" ? "Enter a valid number" : false,
-                  pattern: {
-                    value: /^[0-9]{10,}$/,
-                    message: "Enter a valid mobile number",
-                  },
-                })}
-              />
-              {errors.number && (
-                <p className="text-red-500 text-sm">{errors.number.message}</p>
-              )}
-            </div>
-          )}
 
           {/* signup button */}
           <button className={buttonStyles} type="submit">
