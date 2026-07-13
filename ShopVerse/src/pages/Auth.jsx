@@ -29,7 +29,7 @@ const Auth = () => {
     setError(null);
     let result;
     if (mode === "signup") {
-      result = signup(data.email, data.password);
+      result = signup(data.email, data.password, data.name);
     } else {
       result = login(data.email, data.password);
     }
@@ -92,6 +92,26 @@ const Auth = () => {
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
+
+          {mode === "signup" && (
+            <div className={formGroupStyles}>
+              <label htmlFor="name" className={labelStyles}>
+                Name
+              </label>
+              <input
+                className={inputStyles}
+                {...register("name", {
+                  required: "Name is required",
+                })}
+                type="text"
+                id="text"
+                placeholder="Enter your first name"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
+            </div>
+          )}
 
           {/* signup button */}
           <button className={buttonStyles} type="submit">

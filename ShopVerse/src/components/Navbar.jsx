@@ -47,7 +47,7 @@ const Navbar = () => {
               }`
             }
           >
-            Checkout
+            Cart
           </NavLink>
         </div>
 
@@ -71,8 +71,8 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <span className=" text-yellow-600 text-lg font-bold mx-2">
-                {user.email}
+              <span className=" text-text text-lg font-bold mx-2">
+                {user.name}
               </span>
 
               <button
@@ -164,7 +164,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <span className="text-yellow-600 font-bold">{user.email}</span>
+              <span className="text-text font-bold">{user.name}</span>
 
               <button
                 onClick={() => {

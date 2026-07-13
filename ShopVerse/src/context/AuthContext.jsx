@@ -3,24 +3,24 @@ import { createContext, useState } from "react";
 export const AuthDataContext = createContext(null);
 
 export const AuthContext = ({ children }) => {
-  const CurrentUserEmail = localStorage.getItem("CurrentUserEmail");
+  const CurrentUserName = localStorage.getItem("CurrentUserName");
   const [user, setUser] = useState(
-    CurrentUserEmail ? { email: CurrentUserEmail } : null,
+    CurrentUserName ? { email: CurrentUserName } : null,
   );
 
-  const signup = (email, password) => {
+  const signup = (email, password, name) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
     if (users.find((u) => u.email === email)) {
       return { success: false, error: "Email already exists" };
     }
 
-    const newUser = { email, password };
+    const newUser = { email, password, name };
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("CurrentUserEmail", email);
+    localStorage.setItem("CurrentUserName", name);
 
-    setUser({ email });
+    setUser({ name });
 
     return { success: true };
   };
@@ -35,14 +35,14 @@ export const AuthContext = ({ children }) => {
       return { success: false, error: "invalid email or password" };
     }
 
-    localStorage.setItem("CurrentUserEmail", email);
+    localStorage.setItem("CurrentUserName", user.name);
 
-    setUser({ email });
+    setUser({ user: user.name });
     return { success: true };
   };
 
   const logout = () => {
-    localStorage.removeItem("CurrentUserEmail");
+    localStorage.removeItem("CurrentUserName");
     setUser(null);
   };
 
