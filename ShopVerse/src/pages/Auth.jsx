@@ -16,7 +16,7 @@ const Auth = () => {
 
   const navigate = useNavigate();
 
-  const { signup, login, user, logout } = useContext(AuthDataContext);
+  const { signup, login } = useContext(AuthDataContext);
 
   const {
     register,
@@ -37,10 +37,10 @@ const Auth = () => {
     if (result.success) {
       navigate("/");
       alert("login successful 👍");
-      reset();
     } else {
       setError(result.error);
     }
+    reset();
   }
 
   return (
@@ -48,16 +48,9 @@ const Auth = () => {
       <div className="w-full max-w-sm bg-surface rounded-xl p-8 shadow-2xl">
         <h1 className="text-2xl font-bold text-text mb-4">
           {mode === "signup" ? "Sign Up" : "Login"}
-          {user && (
-            <span className="text-xl text-accent mx-4"> {user.email}</span>
-          )}
         </h1>
-        {error && (
-          <p className="bg-red-300 text-text py-1 px-2 font-semibold">
-            {error}
-          </p>
-        )}
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          {error && <p className="bg-red-200 text-text py-2 px-2">{error}</p>}
           {/* Email Section */}
           <div className={formGroupStyles}>
             <label htmlFor="email" className={labelStyles}>
@@ -104,15 +97,6 @@ const Auth = () => {
           <button className={buttonStyles} type="submit">
             {mode === "signup" ? "Sign Up" : "Login"}
           </button>
-          {mode === "login" && (
-            <button
-              className={`${buttonStyles} mx-2`}
-              onClick={() => logout()}
-              type="button"
-            >
-              logout
-            </button>
-          )}
           {mode === "signup" ? (
             <p className="text-text">
               Already have an account?
