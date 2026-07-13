@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthDataContext } from "../context/AuthContext";
 
 const formGroupStyles = "flex flex-col gap-1 mb-4";
@@ -11,7 +12,11 @@ const inputStyles =
 
 const Auth = () => {
   const [mode, setMode] = useState("signup");
-  const { signup, login } = useContext(AuthDataContext);
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
+  const { signup, login, user, logout } = useContext(AuthDataContext);
 
   const {
     register,
@@ -21,12 +26,21 @@ const Auth = () => {
   } = useForm();
 
   function onSubmit(data) {
+    setError(null);
+    let result;
     if (mode === "signup") {
-      signup(data.email, data.password);
+      result = signup(data.email, data.password);
     } else {
-      login(data.email, data.password);
+      result = login(data.email, data.password);
     }
-    reset();
+
+    if (result.success) {
+      navigate("/");
+      alert("login successful 👍");
+      reset();
+    } else {
+      setError(result.error);
+    }
   }
 
   return (
@@ -34,7 +48,15 @@ const Auth = () => {
       <div className="w-full max-w-sm bg-surface rounded-xl p-8 shadow-2xl">
         <h1 className="text-2xl font-bold text-text mb-4">
           {mode === "signup" ? "Sign Up" : "Login"}
+          {user && (
+            <span className="text-xl text-accent mx-4"> {user.email}</span>
+          )}
         </h1>
+        {error && (
+          <p className="bg-red-300 text-text py-1 px-2 font-semibold">
+            {error}
+          </p>
+        )}
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
           {/* Email Section */}
           <div className={formGroupStyles}>
@@ -82,6 +104,15 @@ const Auth = () => {
           <button className={buttonStyles} type="submit">
             {mode === "signup" ? "Sign Up" : "Login"}
           </button>
+          {mode === "login" && (
+            <button
+              className={`${buttonStyles} mx-2`}
+              onClick={() => logout()}
+              type="button"
+            >
+              logout
+            </button>
+          )}
           {mode === "signup" ? (
             <p className="text-text">
               Already have an account?
