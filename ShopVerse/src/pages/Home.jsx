@@ -1,6 +1,7 @@
-import products from "../data/products";
+import { getProducts } from "../data/products";
 
 const Home = () => {
+  const products = getProducts();
   const text = "text-xl text-primary font-semibold";
   const button =
     "py-2 px-3 bg-accent rounded-xl text-text font-semibold cursor-pointer active:scale-95 shadow-lg transition-all duration-300 hover:translate-y-[-2px]";

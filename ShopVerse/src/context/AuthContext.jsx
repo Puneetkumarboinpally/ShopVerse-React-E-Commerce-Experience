@@ -5,7 +5,7 @@ export const AuthDataContext = createContext(null);
 export const AuthContext = ({ children }) => {
   const CurrentUserName = localStorage.getItem("CurrentUserName");
   const [user, setUser] = useState(
-    CurrentUserName ? { email: CurrentUserName } : null,
+    CurrentUserName ? { name: CurrentUserName } : null,
   );
 
   const signup = (email, password, name) => {
