@@ -2,7 +2,6 @@ import { NavLink, Link } from "react-router-dom";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { AuthDataContext } from "../context/AuthContext";
-
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("darkMode");
@@ -47,7 +46,7 @@ const Navbar = () => {
               }`
             }
           >
-            Checkout
+            Cart
           </NavLink>
         </div>
 
@@ -71,13 +70,13 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <span className=" text-yellow-600 text-lg font-bold mx-2">
-                {user.email}
+              <span className=" text-text text-lg font-bold mx-2">
+                {user.name}
               </span>
 
               <button
                 className="text-lg text-primary cursor-pointer py-2 px-4 font-bold bg-accent rounded-md active:scale-95 transition-all duration-500 hover:-translate-y-1"
-                onClick={logout}
+                onClick={() => logout()}
                 type="button"
               >
                 Logout
@@ -164,7 +163,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <span className="text-yellow-600 font-bold">{user.email}</span>
+              <span className="text-text font-bold">{user.name}</span>
 
               <button
                 onClick={() => {

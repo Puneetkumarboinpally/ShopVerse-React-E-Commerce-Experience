@@ -1,6 +1,8 @@
-import products from "../data/products";
+import { getProducts} from "../data/products";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const products = getProducts();
   const text = "text-xl text-primary font-semibold";
   const button =
     "py-2 px-3 bg-accent rounded-xl text-text font-semibold cursor-pointer active:scale-95 shadow-lg transition-all duration-300 hover:translate-y-[-2px]";
@@ -36,12 +38,13 @@ const Home = () => {
               <p className={text}>{product.name}</p>
               <p className={text}>${product.price}</p>
               <div className="flex my-2 text-center gap-2">
-                <button
+                <Link
                   aria-label="View Details"
                   className={`${button} flex-1`}
+                  to={`/Products/${product.id}`}
                 >
                   View Details
-                </button>
+                </Link>
                 <button aria-label="add to cart" className={`${button} flex-1`}>
                   Add to Cart
                 </button>

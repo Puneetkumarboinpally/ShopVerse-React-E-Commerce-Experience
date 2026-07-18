@@ -4,6 +4,7 @@ import Home from "./pages/Home.jsx";
 import Auth from "./pages/Auth.jsx";
 import Cart from "./pages/Cart.jsx";
 import AuthContext from "./context/AuthContext.jsx";
+import ProductsDetails from "./pages/ProductsDetails.jsx";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/products/:id" element={<ProductsDetails />} />
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
       </div>

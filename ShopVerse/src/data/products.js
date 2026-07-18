@@ -268,4 +268,11 @@ const products = [
       "Wireless gaming controller with ergonomic design and long-lasting battery.",
   },
 ];
-export default products;
+
+export const getProducts = () => {
+  return products;
+};
+
+export const getProductsById = (id) => {
+  return products.find((p) => p.id === Number(id));
+};
