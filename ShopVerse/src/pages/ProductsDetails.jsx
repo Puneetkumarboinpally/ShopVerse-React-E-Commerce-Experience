@@ -4,34 +4,44 @@ import { getProductsById } from "../data/products.js";
 
 const ProductsDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const [products, setProducts] = useState(null);
+  const Navigate = useNavigate();
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const foundProducts = getProductsById(id);
-    if (!foundProducts) {
-      navigate("/");
+    const foundProduct = getProductsById(id);
+    if (!foundProduct) {
+      Navigate("/", { replace: true });
       return;
     }
-    setProducts(foundProducts);
-  }, [id]);
+
+    setProduct(foundProduct);
+  }, [id, Navigate]);
+
+  if (!product) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h2 className="text-2xl font-bold text-text">Loading...</h2>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen flex items-center justify-center mt-6 p-6">
       <div className="w-full max-w-3xl p-6 bg-surface shadow-2xl rounded-2xl">
-        <div className="flex sm:gap-6">
-          <div className="w-1/2">
+        <div className="flex flex-col sm:flex-row gap-6">
+          <div className="w-full sm:w-1/2">
             <img
-              className="w-full overflow-hidden max-w-xs rounded object-contain aspect-square object-center"
-              src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=500&h=500&fit=crop"
-              alt=""
+              className="w-full rounded-lg object-contain aspect-square"
+              src={product.image}
+              alt={product.name}
             />
           </div>
-          <div className="w-1/2">
-            <h2 className="text-text text-3xl font-bold">Controller</h2>
-            <p className="text-accent font-bold text-xl mt-4">$242.99</p>
+          <div className="w-full sm:w-1/2">
+            <h2 className="text-text text-3xl font-bold">{product.name}</h2>
+            <p className="text-accent font-bold text-xl mt-4">
+              ${product.price}
+            </p>
             <p className="text-text text-lg my-6 leading-7">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
-              impedit?
+              {product.description}
             </p>
             <button
               className="py-2 px-4 bg-accent rounded text-text 

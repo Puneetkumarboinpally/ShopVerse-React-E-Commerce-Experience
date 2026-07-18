@@ -1,4 +1,4 @@
-import { getProducts } from "../data/products";
+import { getProducts} from "../data/products";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -41,7 +41,7 @@ const Home = () => {
                 <Link
                   aria-label="View Details"
                   className={`${button} flex-1`}
-                  to={"/Products"}
+                  to={`/Products/${product.id}`}
                 >
                   View Details
                 </Link>
