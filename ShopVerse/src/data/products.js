@@ -269,6 +269,10 @@ const products = [
   },
 ];
 
-export function getProducts() {
+export const getProducts = () => {
   return products;
-}
+};
+
+export const getProductsById = (id) => {
+  return products.find((p) => p.id === Number(id));
+};

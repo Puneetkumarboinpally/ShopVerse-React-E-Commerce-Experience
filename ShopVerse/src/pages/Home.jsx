@@ -1,4 +1,5 @@
 import { getProducts } from "../data/products";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const products = getProducts();
@@ -37,12 +38,13 @@ const Home = () => {
               <p className={text}>{product.name}</p>
               <p className={text}>${product.price}</p>
               <div className="flex my-2 text-center gap-2">
-                <button
+                <Link
                   aria-label="View Details"
                   className={`${button} flex-1`}
+                  to={"/Products"}
                 >
                   View Details
-                </button>
+                </Link>
                 <button aria-label="add to cart" className={`${button} flex-1`}>
                   Add to Cart
                 </button>
