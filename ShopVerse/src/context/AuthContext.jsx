@@ -1,8 +1,10 @@
 import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const AuthDataContext = createContext(null);
 
 export const AuthContext = ({ children }) => {
+  const Navigate = useNavigate();
   const CurrentUserName = localStorage.getItem("CurrentUserName");
   const [user, setUser] = useState(
     CurrentUserName ? { name: CurrentUserName } : null,
@@ -35,14 +37,15 @@ export const AuthContext = ({ children }) => {
       return { success: false, error: "invalid email or password" };
     }
 
-    localStorage.setItem("CurrentUserName", user.name);
+    localStorage.setItem("CurrentUserName", name);
 
-    setUser({ user: user.name });
+    setUser({ user });
     return { success: true };
   };
 
   const logout = () => {
     localStorage.removeItem("CurrentUserName");
+    Navigate("/");
     setUser(null);
   };
 

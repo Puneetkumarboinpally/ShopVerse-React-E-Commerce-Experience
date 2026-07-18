@@ -2,7 +2,6 @@ import { NavLink, Link } from "react-router-dom";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { AuthDataContext } from "../context/AuthContext";
-
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("darkMode");
@@ -77,7 +76,7 @@ const Navbar = () => {
 
               <button
                 className="text-lg text-primary cursor-pointer py-2 px-4 font-bold bg-accent rounded-md active:scale-95 transition-all duration-500 hover:-translate-y-1"
-                onClick={logout}
+                onClick={() => logout()}
                 type="button"
               >
                 Logout
