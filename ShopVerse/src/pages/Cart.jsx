@@ -3,8 +3,8 @@ const Cart = () => {
     <div className="text-red-500 flex justify-center items-center min-h-screen">
       <div>
         <h1>Checkout</h1>
-        <div className="products">
-          <div className="card w-1/2">
+        <div className="products w-1/2 flex justify-between items-center">
+          <div className="card ">
             <div>
               <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop" />
             </div>
