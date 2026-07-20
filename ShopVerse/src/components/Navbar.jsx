@@ -179,7 +179,10 @@ const Navbar = () => {
           )}
 
           <button
-            onClick={() => setDarkMode((prev) => !prev)}
+            onClick={() => {
+              setDarkMode((prev) => !prev);
+              setMenuOpen(false);
+            }}
             className="flex items-center gap-2 py-2 text-primary cursor-pointer"
           >
             {darkMode ? <Sun size={18} /> : <Moon size={18} />}
