@@ -1,5 +1,7 @@
-import { getProducts } from "../data/products";
+import { useContext } from "react";
+
 const Cart = () => {
+  const { addToCart } = useContext();
   return (
     <div className=" mt-16 min-h-screen">
       <h1 className="text-3xl font-bold text-text p-4">Checkout</h1>
