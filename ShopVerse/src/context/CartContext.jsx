@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { getProductsById } from "../data/products.js";
 
 const CartContext = createContext(null);
 
@@ -27,13 +28,25 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  //  GET CART ITEMS WITH PRODUCTS
+  const getCartItemsWithProducts = () => {
+    return cartItem
+      .map((item) => ({
+        ...item,
+        product: getProductsById(item.id),
+      }))
+      .filter((item) => item.product);
+  };
+
   // REMOVE FROM CART FUNCTION
   const remove = (productId) => {
     const removeFromCart = cartItem.filter((item) => item.id !== productId);
     setCartItem(removeFromCart);
   };
   return (
-    <CartContext.Provider value={{ addToCart, cartItem, remove }}>
+    <CartContext.Provider
+      value={{ addToCart, cartItem, remove, getCartItemsWithProducts }}
+    >
       {children}
     </CartContext.Provider>
   );
