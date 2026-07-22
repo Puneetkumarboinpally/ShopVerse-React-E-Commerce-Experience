@@ -5,7 +5,7 @@ const CartContext = createContext(null);
 const CartProvider = ({ children }) => {
   const [cartItem, setCartItem] = useState([]);
 
-  //
+  //ADD TO CART FUNCTION
   const addToCart = (productId) => {
     // find the existing product from the cart
     const existing = cartItem.find((item) => item.id === productId);
@@ -26,8 +26,14 @@ const CartProvider = ({ children }) => {
       setCartItem([...cartItem, { id: productId, quantity: 1 }]);
     }
   };
+
+  // REMOVE FROM CART FUNCTION
+  const remove = (productId) => {
+    const removeFromCart = cartItem.filter((item) => item.id !== productId);
+    setCartItem(removeFromCart);
+  };
   return (
-    <CartContext.Provider value={{ addToCart }}>
+    <CartContext.Provider value={{ addToCart, cartItem, remove }}>
       {children}
     </CartContext.Provider>
   );

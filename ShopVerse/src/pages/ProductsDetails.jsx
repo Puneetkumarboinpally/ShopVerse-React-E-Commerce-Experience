@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductsById } from "../data/products.js";
+import { useCart } from "../context/CartContext.jsx";
 
 const ProductsDetails = () => {
   const { id } = useParams();
@@ -24,6 +25,10 @@ const ProductsDetails = () => {
       </div>
     );
   }
+  const { addToCart, cartItem } = useCart();
+  const CartQuantity = cartItem.find((item) => item.id === product.id);
+  const updatedCartQuantity = CartQuantity ? `(${CartQuantity.quantity}) ` : "";
+
   return (
     <div className="min-h-screen flex items-center justify-center mt-6 p-6">
       <div className="w-full max-w-3xl p-6 bg-surface shadow-2xl rounded-2xl">
@@ -44,11 +49,12 @@ const ProductsDetails = () => {
               {product.description}
             </p>
             <button
+              onClick={() => addToCart(product.id)}
               className="py-2 px-4 bg-accent rounded text-text 
             font-bold text-md cursor-pointer active:scale-95
             transition-all duration-300 hover:translate-y-[-2px]"
             >
-              Add to Cart
+              Add to Cart {updatedCartQuantity}
             </button>
           </div>
         </div>

@@ -1,7 +1,4 @@
-import { useContext } from "react";
-
 const Cart = () => {
-  const { addToCart } = useContext();
   return (
     <div className=" mt-16 min-h-screen">
       <h1 className="text-3xl font-bold text-text p-4">Checkout</h1>
@@ -12,7 +9,7 @@ const Cart = () => {
 
         <div className="w-full p-2 flex flex-col gap-2">
           {/* products cart left section */}
-          <div className="bg-surface p-6 shadow-xl rounded-lg grid grid-cols-1 sm:grid-cols-[100px_1fr_auto] gap-4 items-center">
+          <div className="bg-primary/30 border-2 border-white/40 overflow-hidden shadow-lg p-6 rounded-lg grid grid-cols-1 sm:grid-cols-[100px_1fr_auto] gap-4 items-center">
             {/*product cart image section */}
 
             <img
