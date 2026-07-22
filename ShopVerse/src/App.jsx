@@ -5,12 +5,13 @@ import Auth from "./pages/Auth.jsx";
 import Cart from "./pages/Cart.jsx";
 import AuthContext from "./context/AuthContext.jsx";
 import ProductsDetails from "./pages/ProductsDetails.jsx";
-import CartContext from "./context/CartContext.jsx";
+
+import CartProvider from "./context/CartContext.jsx";
 
 const App = () => {
   return (
     <AuthContext>
-      <CartContext>
+      <CartProvider>
         <div className="transition-color duration-600 ease bg-background h-full">
           <Navbar />
 
@@ -22,7 +23,7 @@ const App = () => {
             <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>
-      </CartContext>
+      </CartProvider>
     </AuthContext>
   );
 };
