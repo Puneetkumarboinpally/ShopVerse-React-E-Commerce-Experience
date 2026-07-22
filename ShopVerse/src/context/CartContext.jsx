@@ -1,16 +1,14 @@
 import { createContext } from "react";
 
-const CartDataContext = createContext([]);
+const CartContext = createContext(null);
 
-const CartContext = ({ Children }) => {
+const CartProvider = ({ Children }) => {
   const addToCart = () => {
     console.log("added");
   };
   return (
-    <CartDataContext.Provider value={addToCart}>
-      {Children}
-    </CartDataContext.Provider>
+    <CartContext.Provider value={addToCart}>{Children}</CartContext.Provider>
   );
 };
 
-export default CartContext;
+export default CartProvider;
