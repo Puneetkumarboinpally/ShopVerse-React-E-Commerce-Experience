@@ -2,11 +2,20 @@ import { NavLink, Link } from "react-router-dom";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { AuthDataContext } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("darkMode");
     return stored ? JSON.parse(stored) : false;
   });
+
+  const { cartItem } = useCart();
+
+  const TotalCartQuantity = cartItem.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
 
   const { user, logout } = useContext(AuthDataContext);
 
@@ -46,7 +55,7 @@ const Navbar = () => {
               }`
             }
           >
-            Cart
+            Cart ({TotalCartQuantity})
           </NavLink>
         </div>
 
@@ -140,7 +149,7 @@ const Navbar = () => {
                 : "font-bold text-secondary hover:text-accent"
             }
           >
-            Cart
+            Cart ({TotalCartQuantity})
           </NavLink>
 
           {!user ? (
