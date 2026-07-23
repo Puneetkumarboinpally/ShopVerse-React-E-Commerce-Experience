@@ -44,7 +44,7 @@ const Auth = () => {
   }
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center p-4">
       <div className="w-full max-w-sm bg-surface rounded-xl p-8 shadow-2xl">
         <h1 className="text-2xl font-bold text-text mb-4">
           {mode === "signup" ? "Sign Up" : "Login"}

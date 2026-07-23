@@ -43,9 +43,52 @@ const CartProvider = ({ children }) => {
     const removeFromCart = cartItem.filter((item) => item.id !== productId);
     setCartItem(removeFromCart);
   };
+
+  // UPDATE CART QUANTITY FUNCTION
+  const updateCartQuantity = (productId, quantity) => {
+    if (quantity <= 0) {
+      remove(productId);
+      return;
+    }
+    setCartItem(
+      cartItem.map((item) =>
+        item.id === productId ? { ...item, quantity } : item,
+      ),
+    );
+  };
+
+  // SUBTOTAL FUNCTION
+  const calculateTotal = () => {
+    const validItems = cartItem
+      .map((item) => ({
+        ...item,
+        product: getProductsById(item.id),
+      }))
+      .filter((item) => item.product);
+
+    const subTotal = validItems.reduce(
+      (total, item) => total + item.quantity * item.product.price,
+      0,
+    );
+
+    const shipping = subTotal === 0 || subTotal > 500 ? 0 : 50;
+    const tax = subTotal * 0.18;
+    const delivery = subTotal === 0 || subTotal > 200 ? 0 : 20;
+
+    const total = subTotal + shipping + tax + delivery;
+
+    return { subTotal, shipping, tax, delivery, total };
+  };
   return (
     <CartContext.Provider
-      value={{ addToCart, cartItem, remove, getCartItemsWithProducts }}
+      value={{
+        addToCart,
+        cartItem,
+        remove,
+        getCartItemsWithProducts,
+        calculateTotal,
+        updateCartQuantity,
+      }}
     >
       {children}
     </CartContext.Provider>
