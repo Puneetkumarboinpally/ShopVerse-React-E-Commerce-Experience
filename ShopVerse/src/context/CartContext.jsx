@@ -44,6 +44,19 @@ const CartProvider = ({ children }) => {
     setCartItem(removeFromCart);
   };
 
+  // UPDATE CART QUANTITY FUNCTION
+  const updateCartQuantity = (productId, quantity) => {
+    if (quantity <= 0) {
+      remove(productId);
+      return;
+    }
+    setCartItem(
+      cartItem.map((item) =>
+        item.id === productId ? { ...item, quantity } : item,
+      ),
+    );
+  };
+
   // SUBTOTAL FUNCTION
   const calculateTotal = () => {
     const validItems = cartItem
@@ -66,7 +79,6 @@ const CartProvider = ({ children }) => {
 
     return { subTotal, shipping, tax, delivery, total };
   };
-
   return (
     <CartContext.Provider
       value={{
@@ -75,6 +87,7 @@ const CartProvider = ({ children }) => {
         remove,
         getCartItemsWithProducts,
         calculateTotal,
+        updateCartQuantity,
       }}
     >
       {children}
